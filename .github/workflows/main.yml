@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Gravitee.io Demo
+
+on: [push]
+
+jobs:
+  gio_job:
+    runs-on: ubuntu-latest
+    name: job gio diff
+    steps:
+      - uses: actions/checkout@v2
+        name: "checkout"
+      - name: gio apim apis diff
+        id: gio_apim_apis_diff
+        uses: GGui/graviteeio-apim-api-definition-action@v1.0b01
+        env:
+          GIO_TOKEN: ${{ secrets.GIO_TOKEN }}
+          GIO_APIM_URL: ${{ secrets.GIO_APIM_URL }}
+        with:
+            command: "diff"
+            api: ${{ secrets.GIO_API_ID }}
+            gio_workspaces: "gio"
+      - name: gio apim apis apply
+        id: gio_apim_apis_apply
+        uses: GGui/graviteeio-apim-api-definition-action@v1.0b01
+        env:
+          GIO_TOKEN: ${{ secrets.GIO_TOKEN }}
+          GIO_APIM_URL: ${{ secrets.GIO_APIM_URL }}
+        with:
+            command: "apply"
+            api: ${{ secrets.GIO_API_ID }}
+            gio_workspaces: "gio"
