@@ -2,6 +2,8 @@
 
 name: Gravitee.io Demo
 
+on: [push]
+
 jobs:
   gio_job:
     runs-on: ubuntu-latest
