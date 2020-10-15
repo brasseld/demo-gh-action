@@ -4,6 +4,7 @@ name: Gravitee.io Demo
 
 on: [push]
 
+# Use demo env
 jobs:
   gio_job:
     runs-on: ubuntu-latest
